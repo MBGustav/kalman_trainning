@@ -1,8 +1,7 @@
-function [xm xcov] = UT(Xi, W, noiseCov)  
+function [xm xcov] = UT(Xi, W, noiseCov, kmax)  
 %
-%
-[n, kmax] = size(Xi);
-
+%[n, kmax] = size(Xi);
+n = size(Xi, 1);
 xm = 0;
 for k=1:kmax
   xm = xm + W(k)*Xi(:, k);

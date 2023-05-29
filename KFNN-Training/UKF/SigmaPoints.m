@@ -9,7 +9,7 @@ function [Xi Ws] = SigmaPoints(xm, P, kappa, kmax);
   Xi(:,1) = xm;
   
    for k=1:n
-    Xi(:, k+1) = xm + U(k, :)';   
+    Xi(:, k+1) = xm + U(k, :)';
     Ws(k+1)     = 1 / (2*(n+kappa));
   end
 

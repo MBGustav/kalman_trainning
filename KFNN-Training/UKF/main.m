@@ -3,28 +3,29 @@ close all
 clc;
 
 
-X = [0 0 1; 
+X = [0 0 1;
      0 1 1;
      1 0 1;
      1 1 1];
+ 
+D = [0; 1; 1; 1];
 
-D = [0;0;1;1];
 
-%%W =  randn(3,1);
-W = [-0.47399; 0.73467; 1.5124];
+W =  randn(1,3);
+%%W = [-0.47399; 0.73467; 1.5124];
 
 %%Condicoes iniciais
-N = 1;
-ns = size(W,1);
-nd = size(D,1);
-s = W;
+N = 100;
+ns = size(W, 2);
+nd = size(D, 1);
+s = W';
 kappa = 0;
 kmax = 2*ns+1;
-
+ 
 %% Modelagem do Sistema
-P = eye(ns);
-R = eye(nd);
-Q = eye(ns);
+P = 0.01*eye(ns);
+R = 1.0*eye(nd);
+Q = 1.0*eye(ns);
 z = D;
 
 for j=1:N
@@ -41,14 +42,14 @@ for j=1:N
     hSi = zeros(nd, kmax);
     for k=1:kmax
       for i =1:nd
-        h(i,:) = hs_(Si(:,k), X(i,:));
+        h(i,:) = hs_(Si(:,k)', X(i,:)');
       end
       hSi(:,k) = h;
     end
     
-      % Transformação Uncented -- UT
-    [sp Pp] = UT(fSi, Ws, Q);
-    [zp Pz] = UT(hSi, Ws, R);
+      % Transformação Uncented - UT
+    [sp Pp] = UT(fSi, Ws, Q, kmax);
+    [zp Pz] = UT(hSi, Ws, R, kmax);
     
     Psz = zeros(ns, nd);
     for k=1:kmax
@@ -62,7 +63,8 @@ for j=1:N
     s = sp + K*error;
     P = Pp - K*Pz*K';
     
-    cost(j) = sum(abs(error))
+    cost(j) = sum(abs(error));
 end
+cost(N)
 
 plot(cost)

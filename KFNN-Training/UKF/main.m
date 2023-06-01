@@ -7,15 +7,18 @@ X = [0 0 1;
      0 1 1;
      1 0 1;
      1 1 1];
- 
-D = [0; 1; 1; 1];
+
+%D = [0; 1; 1; 0]; %XOR
+%D = [0; 1; 1; 1]; %OR
+D = [0; 0; 0; 1]; %AND 
+%D = [0; 0; 1; 1]; %X
+
 
 
 W =  randn(1,3);
-%%W = [-0.47399; 0.73467; 1.5124];
 
 %%Condicoes iniciais
-N = 100;
+N = 1000;
 ns = size(W, 2);
 nd = size(D, 1);
 s = W';
@@ -65,6 +68,11 @@ for j=1:N
     
     cost(j) = sum(abs(error));
 end
-cost(N)
+
+%%Fase de Reconhecimento - saidas obtidas
+for i=1:nd
+  x = X(i,:);
+  y = sigmoid_f(s'*x')
+end 
 
 plot(cost)

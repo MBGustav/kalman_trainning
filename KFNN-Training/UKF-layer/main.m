@@ -8,9 +8,9 @@ X = [0 0 1;
      1 0 1;
      1 1 1];
 
-%D = [0; 1; 1; 0]; %XOR
+D = [0; 1; 1; 0]; %XOR
 %D = [0; 1; 1; 1]; %OR
-D = [0; 0; 0; 1]; %AND 
+%D = [0; 0; 0; 1]; %AND 
 %D = [0; 0; 1; 1]; %X
 
 
@@ -20,7 +20,7 @@ W1 = 2*rand(4,3)-1
 W2 = 2*rand(1,4)-1
 
 %%Condicoes iniciais
-N = 1000;
+N = 500;
 ns1 = size(W1,1)*size(W1,2);
 ns2 = size(W2,1)*size(W2,2);
 ns = ns1 + ns2; 
@@ -35,7 +35,7 @@ kmax = 2*ns+1;
  
 %% Modelagem do Sistema
 P = 0.01*eye(ns);
-R = 1.0*eye(nd);
+R = 10.0*eye(nd);
 Q = 1.0*eye(ns);
 z = D;
 
@@ -92,9 +92,5 @@ for i=1:nd
   y = sigmoid_f(v);
 
 end
-  
-  %%Peso
-  s
-  
 
-plot(cost)
+plot(cost);

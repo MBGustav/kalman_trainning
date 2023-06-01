@@ -1,2 +1,7 @@
 /books/**
 **/.vscode/**
+**/**.zip
+**/**.ofig
+**/octave-workspace
+**/__pycache__/**
+
